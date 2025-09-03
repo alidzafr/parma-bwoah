@@ -9,7 +9,16 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                <form method="POST" action="{{ route('register') }}" class="m-10">
+                {{-- @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="py-3 w-full rounded-3xl bg-red text-white">
+                            {{$error}}
+                        </div>
+                    @endforeach
+                    
+                @endif --}}
+
+                <form method="POST" action="{{ route('admincategories.store') }}" class="m-10" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Name -->
