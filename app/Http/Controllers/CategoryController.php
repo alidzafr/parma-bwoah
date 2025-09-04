@@ -75,7 +75,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin/categories/edit');
+        return view('admin/categories/edit', ['category' => $category]);
     }
 
     /**
@@ -83,7 +83,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'sometimes|max:25|string',
+            'icon' => 'sometimes|image|mimes:png,jpg,svg'
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            if ($request->hasFile('icon')) {
+                $iconPath = $request->file('icon')->store('category_icons', 'public');
+                $validated['icon'] = $iconPath;
+            }
+            $validated['slug'] = Str::slug($request->name);
+            // Slug nama
+            $category->update($validated);
+
+            DB::commit();
+
+            return redirect()->route('admincategories.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 
     /**
@@ -91,6 +117,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        try {
+            $category->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }
