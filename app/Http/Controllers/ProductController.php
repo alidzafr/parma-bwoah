@@ -17,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin/products/index');
+        $products = Product::all();
+        return view('admin/products/index', ['products' => $products]);
     }
 
     /**
@@ -34,13 +35,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $validated = $request->validate([
             'name' => 'required|max:25|string',
             'price' => 'required|max:25|string',
-            'category_id' => 'required|max:25|string',
-            'about' => 'required|max:25|string',
+            'category_id' => 'required|integer',
+            'about' => 'required|string',
             'photo' => 'required|image|mimes:png,jpg,svg'
         ]);
 
@@ -81,7 +82,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return 'this is edit';
     }
 
     /**
@@ -97,6 +98,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        return 'destroying content';
     }
 }
