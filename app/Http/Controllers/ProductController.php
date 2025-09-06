@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->orderBy('id', 'DESC')->get();
         return view('admin/products/index', ['products' => $products]);
     }
 
@@ -82,7 +82,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return 'this is edit';
+        $categories = Category::all();
+        return view('admin/products/edit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -90,7 +94,36 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:25|string',
+            'price' => 'required|max:25|string',
+            'category_id' => 'required|integer',
+            'about' => 'required|string',
+            'photo' => 'sometimes|image|mimes:png,jpg,svg'
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            if ($request->hasFile('photo')) {
+                $productPath = $request->file('photo')->store('product_photos', 'public');
+                $validated['photo'] = $productPath;
+            }
+            $validated['slug'] = Str::slug($request->name);
+            // Slug nama
+            $product->update($validated);
+
+            DB::commit();
+
+            return redirect()->route('adminproducts.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 
     /**
@@ -98,6 +131,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        return 'destroying content';
+        try {
+            $product->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }

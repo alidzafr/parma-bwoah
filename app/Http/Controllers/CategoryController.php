@@ -84,7 +84,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
-            'name' => 'sometimes|max:25|string',
+            'name' => 'required|max:25|string',
             'icon' => 'sometimes|image|mimes:png,jpg,svg'
         ]);
 

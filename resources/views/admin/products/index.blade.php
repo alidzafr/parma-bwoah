@@ -24,7 +24,10 @@
                             <p class="text-base text-slate-500">
                                 Rp {{$product->price}}
                             </p>
-                        </div>
+                            </div>
+                        <p class="text-base text-slate-500">
+                            {{$product->category->name}}
+                        </p>
                     </div>
 
                     <div class="flex flex-row items-center gap-x-2">
@@ -40,7 +43,9 @@
                     </div>
                 </div>
             @empty
-                
+                <p>
+                    Belum ada produk.
+                </p>
             @endforelse                
 
             </div>
