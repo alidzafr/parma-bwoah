@@ -81,13 +81,77 @@
                             </p>
                         </div>
 
+                        <h3 class="text-xl font-bold text-indigo-950">
+                            Detail of Delivery
+                        </h3>
+                        <div class="item-card flex flex-row justify-between items-center">
+                            <p class="text-base text-slate-500">
+                                Address
+                            </p>
+                            <h3 class="text-xl font-bold text-indigo-950">
+                                Kisamaun no.25
+                            </h3>
+                        </div>
+                        <div class="item-card flex flex-row justify-between items-center">
+                            <p class="text-base text-slate-500">
+                                City
+                            </p>
+                            <h3 class="text-xl font-bold text-indigo-950">
+                                Semarang
+                            </h3>
+                        </div>
+                        <div class="item-card flex flex-row justify-between items-center">
+                            <p class="text-base text-slate-500">
+                                Post Code
+                            </p>
+                            <h3 class="text-xl font-bold text-indigo-950">
+                                123098
+                            </h3>
+                        </div>
+                        <div class="item-card flex flex-row justify-between items-center">
+                            <p class="text-base text-slate-500">
+                                Phone Number
+                            </p>
+                            <h3 class="text-xl font-bold text-indigo-950">
+                                08642135
+                            </h3>
+                        </div>
+                        <div class="item-card flex flex-row justify-between items-center">
+                            <p class="text-base text-slate-500">
+                                Note
+                            </p>
+                            <h3 class="text-lg font-bold text-indigo-950">
+                                Seberang Alun-alun, sebelah bengkel bugatti
+                            </h3>
+                        </div>
                     </div>
                     
-                    <div class="flex flex-col gap-y-5 col-span-2">
+                    <div class="flex flex-col gap-y-5 col-span-2 items-end">
+                        <h3 class="text-xl font-bold text-indigo-950">
+                            Proof of Payment:
+                        </h3>
                         <img src="" alt="" class="w-[300px] bg-red-300 h-[400px]">
                     </div>
                             
                 </div>
+
+                <hr class="my-3">
+
+                @role('owner')
+                <form action="{{route('product_transaction.update', 1)}}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button class="font-bold  py-3 px-5 rounded-full text-white bg-indigo-700">
+                        Approve Order
+                    </button>
+                </form>
+                @endrole
+
+                @role('buyer')
+                <a href="#" class="w-fit font-bold py-3 px-5 rounded-full text-white bg-indigo-700">
+                    Contact Admin
+                </a>
+                @endrole
                 
             </div>
         </div>
