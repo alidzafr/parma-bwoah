@@ -24,7 +24,7 @@
                             <p class="text-base text-slate-500">
                                 Rp {{$product->price}}
                             </p>
-                            </div>
+                        </div>
                         <p class="text-base text-slate-500">
                             {{$product->category->name}}
                         </p>

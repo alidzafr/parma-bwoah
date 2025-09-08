@@ -16,14 +16,23 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @role('owner')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admincategories.index')" :active="request()->routeIs('admincategories.index')">
+                            {{ __('Manage Category') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('adminproducts.index')" :active="request()->routeIs('adminproducts.index')">
+                            {{ __('Manage Product') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admincategories.index')" :active="request()->routeIs('admincategories.index')">
-                        {{ __('Manage Category') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('adminproducts.index')" :active="request()->routeIs('adminproducts.index')">
-                        {{ __('Manage Product') }}
+                    <x-nav-link :href="route('product_transaction.index')" :active="request()->routeIs('product_tranasction.index')">
+                        {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Transaction') }}
                     </x-nav-link>
                 </div>
             </div>
