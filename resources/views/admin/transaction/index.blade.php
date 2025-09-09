@@ -13,13 +13,14 @@
             <div class="bg-white flex flex-col gap-y-5 p-10 overflow-hidden shadow-sm sm:rounded-lg">
                 
                 {{-- Row Content --}}
+                @forelse ($product_transactions as $transaction)
                 <div class="item-card flex flex-row justify-between items-center">
                     <div>
                         <p class="text-base text-slate-500">
                             Total Transaksi
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            Rp 18.000.000
+                            {{$transaction->total_amount}}
                         </h3>
                     </div>
                     
@@ -28,53 +29,33 @@
                             Date
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            25 January 2025
+                            {{$transaction->created_at}}
                         </h3>
                     </div>
                     {{-- Badge status --}}
+                    {{-- {{$transaction->is_paid ? 'approved' : 'pending'}} --}}
+                    @if ($transaction->is_paid)
+                    <span class="py-1 px-3 rounded-full bg-green-500">
+                        <div class="text-white font-bold text sm">
+                            Success
+                        </div>
+                    </span>
+                    @else
                     <span class="py-1 px-3 rounded-full bg-orange-500">
                         <div class="text-white font-bold text sm">
                             Pending
                         </div>
                     </span>
+                    @endif
 
                     <div class="flex flex-row items-center gap-x-2">
                         <a href="#" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
                     </div>
                 </div>
                 <hr class="my-3">
-                
-                {{-- Row Content --}}
-                <div class="item-card flex flex-row justify-between items-center">
-                    <div>
-                        <p class="text-base text-slate-500">
-                            Total Transaksi
-                        </p>
-                        <h3 class="text-xl font-bold text-indigo-950">
-                            Rp 18.000.000
-                        </h3>
-                    </div>
-                    
-                    <div>
-                        <p class="text-base text-slate-500">
-                            Date
-                        </p>
-                        <h3 class="text-xl font-bold text-indigo-950">
-                            25 January 2025
-                        </h3>
-                    </div>
-                    {{-- Badge status --}}
-                    <span class="py-1 px-3 rounded-full bg-orange-500">
-                        <div class="text-white font-bold text sm">
-                            Pending
-                        </div>
-                    </span>
-
-                    <div class="flex flex-row items-center gap-x-2">
-                        <a href="#" class="py-3 px-5 rounded-full text-white bg-indigo-700">Edit</a>
-                    </div>
-                </div>
-                <hr class="my-3">
+                    @empty
+                    <p>Transaksi Belum Tersedia</p>
+                @endforelse  
                 
             </div>
         </div>

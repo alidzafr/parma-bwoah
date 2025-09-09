@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product_transaction;
 use App\Http\Controllers\Controller;
+use App\Models\ProductTransaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductTransactionController extends Controller
 {
@@ -13,7 +15,14 @@ class ProductTransactionController extends Controller
      */
     public function index()
     {
-        return view('admin/transaction/index');
+        $user = Auth::user();
+
+        if ($user->HasRole('buyer')) {
+            $product_transactions = $user->product_transactions()->orderBy('id', 'DESC')->get();
+        } else {
+            $product_transactions = ProductTransaction::orderBy('id', 'DESC')->get();
+        }
+        return view('admin/transaction/index', ['product_transactions' => $product_transactions]);
     }
 
     /**
