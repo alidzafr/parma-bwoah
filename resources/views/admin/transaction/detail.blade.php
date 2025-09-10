@@ -18,7 +18,7 @@
                             Total Transaksi
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            Rp 18.000.000
+                            Rp {{$productTransaction->total_amount}}
                         </h3>
                     </div>
                     
@@ -27,15 +27,25 @@
                             Date
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            25 January 2025
+                            {{$productTransaction->created_at}}
                         </h3>
                     </div>
+                    
                     {{-- Badge status --}}
+                    {{-- {{$transaction->is_paid ? 'approved' : 'pending'}} --}}
+                    @if ($productTransaction->is_paid)
+                    <span class="py-1 px-3 rounded-full bg-green-500">
+                        <div class="text-white font-bold text sm">
+                            Success
+                        </div>
+                    </span>
+                    @else
                     <span class="py-1 px-3 rounded-full bg-orange-500">
                         <div class="text-white font-bold text sm">
                             Pending
                         </div>
                     </span>
+                    @endif
 
                 </div>
                 <hr class="my-3">

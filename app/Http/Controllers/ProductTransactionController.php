@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product_transaction;
 use App\Http\Controllers\Controller;
 use App\Models\ProductTransaction;
 use Illuminate\Http\Request;
@@ -44,15 +43,15 @@ class ProductTransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product_transaction $product_transaction)
+    public function show(ProductTransaction $productTransaction)
     {
-        //
+        return view('admin/transaction/detail', ['productTransaction' => $productTransaction]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product_transaction $product_transaction)
+    public function edit(ProductTransaction $productTransaction)
     {
         //
     }
@@ -60,7 +59,7 @@ class ProductTransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product_transaction $product_transaction)
+    public function update(Request $request, ProductTransaction $productTransaction)
     {
         //
     }
@@ -68,7 +67,7 @@ class ProductTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product_transaction $product_transaction)
+    public function destroy(ProductTransaction $productTransaction)
     {
         //
     }
