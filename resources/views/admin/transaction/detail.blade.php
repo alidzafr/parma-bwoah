@@ -58,38 +58,26 @@
                     
                     <div class="flex flex-col gap-y-5 col-span-2">
                         {{-- Item list --}}
+                        @forelse ($productTransaction->transactionDetails as $purchased_item)
                         <div class="item-card flex flex-row justify-between items-center">
                             <div class="flex flex-row items-center gap-x-3">
-                                <img src="" alt ="" class="w-[50px] h-[50px]">
+                                <img src="{{Storage::url($purchased_item->product->photo)}}" alt ="" class="w-[50px] h-[50px]">
                                 <div>
                                     <h3 class="text-xl font-bold text-indigo-950">
-                                        Panadol
+                                        {{$purchased_item->product->name}}
                                     </h3>
                                     <p class="text-base text-slate-500">
-                                        Rp 20.000
+                                        {{$purchased_item->price}}
                                     </p>
                                 </div>
                             </div>
                             <p class="text-base text-slate-500">
-                                Vitamin
+                                {{$purchased_item->product->category->name}}
                             </p>
                         </div>
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="" alt ="" class="w-[50px] h-[50px]">
-                                <div>
-                                    <h3 class="text-xl font-bold text-indigo-950">
-                                        Panadol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        Rp 20.000
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-base text-slate-500">
-                                Vitamin
-                            </p>
-                        </div>
+                        @empty
+                            
+                        @endforelse
 
                         <h3 class="text-xl font-bold text-indigo-950">
                             Detail of Delivery
@@ -99,7 +87,7 @@
                                 Address
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                Kisamaun no.25
+                                {{{$productTransaction->address}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -107,7 +95,7 @@
                                 City
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                Semarang
+                                {{{$productTransaction->city}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -115,7 +103,7 @@
                                 Post Code
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                123098
+                                {{{$productTransaction->post_code}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -123,7 +111,7 @@
                                 Phone Number
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                08642135
+                                {{{$productTransaction->phone_number}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -131,7 +119,7 @@
                                 Note
                             </p>
                             <h3 class="text-lg font-bold text-indigo-950">
-                                Seberang Alun-alun, sebelah bengkel bugatti
+                                {{$productTransaction->notes}}
                             </h3>
                         </div>
                     </div>
@@ -140,7 +128,7 @@
                         <h3 class="text-xl font-bold text-indigo-950">
                             Proof of Payment:
                         </h3>
-                        <img src="" alt="" class="w-[300px] bg-red-300 h-[400px]">
+                        <img src="" alt="{{Storage::url($productTransaction->proof)}}" class="w-[300px] bg-red-300 h-[400px]">
                     </div>
                             
                 </div>
