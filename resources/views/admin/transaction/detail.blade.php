@@ -136,13 +136,15 @@
                 <hr class="my-3">
 
                 @role('owner')
-                <form action="{{route('product_transaction.update', 1)}}" method="post">
+                @if (!$productTransaction->is_paid)
+                <form action="{{route('product_transaction.update', $productTransaction)}}" method="post">
                     @csrf
                     @method('PUT')
                     <button class="font-bold  py-3 px-5 rounded-full text-white bg-indigo-700">
                         Approve Order
                     </button>
                 </form>
+                @endif
                 @endrole
 
                 @role('buyer')
