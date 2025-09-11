@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\ProductTransaction;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProductTransactionController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +16,11 @@ class ProductTransactionController extends Controller
         $user = Auth::user();
 
         if ($user->HasRole('buyer')) {
-            $product_transactions = $user->product_transactions()->orderBy('id', 'DESC')->get();
+            $invoices = $user->invoices()->orderBy('id', 'DESC')->get();
         } else {
-            $product_transactions = ProductTransaction::orderBy('id', 'DESC')->get();
+            $invoices = Invoice::orderBy('id', 'DESC')->get();
         }
-        return view('admin/transaction/index', ['product_transactions' => $product_transactions]);
+        return view('admin/transaction/index', ['invoices' => $invoices]);
     }
 
     /**
@@ -43,15 +42,15 @@ class ProductTransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductTransaction $productTransaction)
+    public function show(Invoice $invoice)
     {
-        return view('admin/transaction/detail', ['productTransaction' => $productTransaction]);
+        return view('admin/transaction/detail', ['invoice' => $invoice]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductTransaction $productTransaction)
+    public function edit(Invoice $invoice)
     {
         //
     }
@@ -59,9 +58,9 @@ class ProductTransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductTransaction $productTransaction)
+    public function update(Request $request, Invoice $invoice)
     {
-        $productTransaction->update([
+        $invoice->update([
             'is_paid' => true
         ]);
         return redirect()->back();
@@ -70,7 +69,7 @@ class ProductTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductTransaction $productTransaction)
+    public function destroy(Invoice $invoice)
     {
         //
     }

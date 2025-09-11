@@ -18,7 +18,7 @@
                 @endif -->
 
 
-                <form method="POST" action="{{ route('admincategories.update', $category) }}" class="m-10" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.category.update', $category) }}" class="m-10" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

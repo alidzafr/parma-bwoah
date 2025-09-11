@@ -51,7 +51,7 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admincategories.index');
+            return redirect()->route('admin.category.index');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -101,7 +101,7 @@ class CategoryController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admincategories.index');
+            return redirect()->route('admin.category.index');
         } catch (\Exception $e) {
             DB::rollBack();
 

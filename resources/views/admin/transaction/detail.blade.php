@@ -18,7 +18,7 @@
                             Total Transaksi
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            Rp {{$productTransaction->total_amount}}
+                            Rp {{$invoice->total_amount}}
                         </h3>
                     </div>
                     
@@ -27,13 +27,13 @@
                             Date
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            {{$productTransaction->created_at}}
+                            {{$invoice->created_at}}
                         </h3>
                     </div>
                     
                     {{-- Badge status --}}
                     {{-- {{$transaction->is_paid ? 'approved' : 'pending'}} --}}
-                    @if ($productTransaction->is_paid)
+                    @if ($invoice->is_paid)
                     <span class="py-1 px-3 rounded-full bg-green-500">
                         <div class="text-white font-bold text sm">
                             Success
@@ -58,21 +58,21 @@
                     
                     <div class="flex flex-col gap-y-5 col-span-2">
                         {{-- Item list --}}
-                        @forelse ($productTransaction->transactionDetails as $purchased_item)
+                        @forelse ($invoice->purchased_products as $purchased_product)
                         <div class="item-card flex flex-row justify-between items-center">
                             <div class="flex flex-row items-center gap-x-3">
-                                <img src="{{Storage::url($purchased_item->product->photo)}}" alt ="" class="w-[50px] h-[50px]">
+                                <img src="{{Storage::url($purchased_product->product->photo)}}" alt ="" class="w-[50px] h-[50px]">
                                 <div>
                                     <h3 class="text-xl font-bold text-indigo-950">
-                                        {{$purchased_item->product->name}}
+                                        {{$purchased_product->product->name}}
                                     </h3>
                                     <p class="text-base text-slate-500">
-                                        {{$purchased_item->price}}
+                                        {{$purchased_product->price}}
                                     </p>
                                 </div>
                             </div>
                             <p class="text-base text-slate-500">
-                                {{$purchased_item->product->category->name}}
+                                {{$purchased_product->product->category->name}}
                             </p>
                         </div>
                         @empty
@@ -87,7 +87,7 @@
                                 Address
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                {{{$productTransaction->address}}}
+                                {{{$invoice->address}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -95,7 +95,7 @@
                                 City
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                {{{$productTransaction->city}}}
+                                {{{$invoice->city}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -103,7 +103,7 @@
                                 Post Code
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                {{{$productTransaction->post_code}}}
+                                {{{$invoice->post_code}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -111,7 +111,7 @@
                                 Phone Number
                             </p>
                             <h3 class="text-xl font-bold text-indigo-950">
-                                {{{$productTransaction->phone_number}}}
+                                {{{$invoice->phone_number}}}
                             </h3>
                         </div>
                         <div class="item-card flex flex-row justify-between items-center">
@@ -119,7 +119,7 @@
                                 Note
                             </p>
                             <h3 class="text-lg font-bold text-indigo-950">
-                                {{$productTransaction->notes}}
+                                {{$invoice->notes}}
                             </h3>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                         <h3 class="text-xl font-bold text-indigo-950">
                             Proof of Payment:
                         </h3>
-                        <img src="" alt="{{Storage::url($productTransaction->proof)}}" class="w-[300px] bg-red-300 h-[400px]">
+                        <img src="" alt="{{Storage::url($invoice->proof)}}" class="w-[300px] bg-red-300 h-[400px]">
                     </div>
                             
                 </div>
@@ -136,8 +136,8 @@
                 <hr class="my-3">
 
                 @role('owner')
-                @if (!$productTransaction->is_paid)
-                <form action="{{route('product_transaction.update', $productTransaction)}}" method="post">
+                @if (!$invoice->is_paid)
+                <form action="{{route('order.update', $invoice)}}" method="post">
                     @csrf
                     @method('PUT')
                     <button class="font-bold  py-3 px-5 rounded-full text-white bg-indigo-700">

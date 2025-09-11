@@ -18,7 +18,7 @@
                     
                 @endif --}}
 
-                <form method="POST" action="{{ route('adminproducts.update', $product) }}" class="m-10" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.product.update', $product) }}" class="m-10" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

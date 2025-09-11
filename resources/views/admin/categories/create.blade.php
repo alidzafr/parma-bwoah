@@ -18,7 +18,7 @@
                     
                 @endif --}}
 
-                <form method="POST" action="{{ route('admincategories.store') }}" class="m-10" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.category.store') }}" class="m-10" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Name -->

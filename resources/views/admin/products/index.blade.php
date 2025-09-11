@@ -2,8 +2,8 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between items-center">
-                {{ __('Manage Categories') }}
-                <a href="{{route('adminproducts.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Product</a>
+                {{ __('Manage Product') }}
+                <a href="{{route('admin.product.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Product</a>
             </div>
         </h2>
     </x-slot>
@@ -31,9 +31,9 @@
                     </div>
 
                     <div class="flex flex-row items-center gap-x-2">
-                        <a href="{{route('adminproducts.edit', $product->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Edit</a>
+                        <a href="{{route('admin.product.edit', $product->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Edit</a>
                         
-                        <form method="POST" action="{{ route('adminproducts.destroy', $product->id) }}" class="">
+                        <form method="POST" action="{{ route('admin.product.destroy', $product->id) }}" class="">
                             @csrf
                             @method('DELETE')
                             <button class="py-3 px-5 rounded-full text-white bg-red-700" onclick="return confirm('Are you sure want to delete?');">

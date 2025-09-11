@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TransactionDetail extends Model
+class PurchasedProduct extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class TransactionDetail extends Model
 
     public function ProductTransaction()
     {
-        return $this->belongsTo(ProductTransaction::class);
+        return $this->belongsTo(Invoice::class);
     }
 
     public function product()

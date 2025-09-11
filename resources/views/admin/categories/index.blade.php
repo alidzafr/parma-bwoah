@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between items-center">
                 {{ __('Manage Categories') }}
-                <a href="{{route('admincategories.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Category</a>
+                <a href="{{route('admin.category.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Category</a>
             </div>
         </h2>
     </x-slot>
@@ -21,9 +21,9 @@
                     </h3>
 
                     <div class="flex flex-row items-center gap-x-2">
-                        <a href="{{route('admincategories.edit', $category->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Edit</a>
+                        <a href="{{route('admin.category.edit', $category->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Edit</a>
                         
-                        <form method="POST" action="{{ route('admincategories.destroy', $category->id) }}" class="">
+                        <form method="POST" action="{{ route('admin.category.destroy', $category->id) }}" class="">
                             @csrf
                             @method('DELETE')
                             <button class="py-3 px-5 rounded-full text-white bg-red-700" onclick="return confirm('Are you sure want to delete?');">
@@ -33,7 +33,9 @@
                     </div>
                 </div>
             @empty
-                
+                <p>
+                    Belum ada Kategori
+                </p>
             @endforelse                
 
             </div>

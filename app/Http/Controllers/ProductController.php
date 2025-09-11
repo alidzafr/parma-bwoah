@@ -58,7 +58,7 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->route('adminproducts.index');
+            return redirect()->route('admin.product.index');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -115,7 +115,7 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->route('adminproducts.index');
+            return redirect()->route('admin.product.index');
         } catch (\Exception $e) {
             DB::rollBack();
 

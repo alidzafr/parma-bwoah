@@ -2,8 +2,8 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between items-center">
-                {{ __('Manage Categories') }}
-                <a href="{{route('adminproducts.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Product</a>
+                {{ __('Manage Transaction') }}
+                <a href="{{route('order.create')}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">Add Transaction</a>
             </div>
         </h2>
     </x-slot>
@@ -13,14 +13,14 @@
             <div class="bg-white flex flex-col gap-y-5 p-10 overflow-hidden shadow-sm sm:rounded-lg">
                 
                 {{-- Row Content --}}
-                @forelse ($product_transactions as $transaction)
+                @forelse ($invoices as $invoice)
                 <div class="item-card flex flex-row justify-between items-center">
                     <div>
                         <p class="text-base text-slate-500">
                             Total Transaksi
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            {{$transaction->total_amount}}
+                            {{$invoice->total_amount}}
                         </h3>
                     </div>
                     
@@ -29,12 +29,12 @@
                             Date
                         </p>
                         <h3 class="text-xl font-bold text-indigo-950">
-                            {{$transaction->created_at}}
+                            {{$invoice->created_at}}
                         </h3>
                     </div>
                     {{-- Badge status --}}
-                    {{-- {{$transaction->is_paid ? 'approved' : 'pending'}} --}}
-                    @if ($transaction->is_paid)
+                    {{-- {{$invoice->is_paid ? 'approved' : 'pending'}} --}}
+                    @if ($invoice->is_paid)
                     <span class="py-1 px-3 rounded-full bg-green-500">
                         <div class="text-white font-bold text sm">
                             Success
@@ -49,7 +49,7 @@
                     @endif
 
                     <div class="flex flex-row items-center gap-x-2">
-                        <a href="{{route('product_transaction.show', $transaction)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
+                        <a href="{{route('order.show', $invoice)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
                     </div>
                 </div>
                 <hr class="my-3">
