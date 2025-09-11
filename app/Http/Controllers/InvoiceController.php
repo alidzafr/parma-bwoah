@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Number;
 
 class InvoiceController extends Controller
 {
@@ -45,6 +46,7 @@ class InvoiceController extends Controller
     public function show($id)
     {
         $invoice = Invoice::findorFail($id);
+        // $invoice['total_amount'] = Number::format($invoice['total_amount']);
         // dd($invoice);
         return view('admin/transaction/detail', ['invoice' => $invoice]);
     }

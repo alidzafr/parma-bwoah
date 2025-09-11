@@ -67,12 +67,15 @@
                                         {{$purchased_product->product->name}}
                                     </h3>
                                     <p class="text-base text-slate-500">
-                                        {{$purchased_product->price}}
+                                        {{$purchased_product->product->category->name}}
                                     </p>
                                 </div>
                             </div>
-                            <p class="text-base text-slate-500">
-                                {{$purchased_product->product->category->name}}
+                            <p>
+                                x{{$purchased_product->quantity}}
+                            </p>
+                            <p class="text-base text-indigo-950">
+                                Rp {{$purchased_product->price}}
                             </p>
                         </div>
                         @empty
