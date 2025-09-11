@@ -13,7 +13,7 @@ class PurchasedProduct extends Model
         'id'
     ];
 
-    public function ProductTransaction()
+    public function invoice()
     {
         return $this->belongsTo(Invoice::class);
     }

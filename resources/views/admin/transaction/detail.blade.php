@@ -58,7 +58,7 @@
                     
                     <div class="flex flex-col gap-y-5 col-span-2">
                         {{-- Item list --}}
-                        @forelse ($invoice->purchased_products as $purchased_product)
+                        @forelse ($invoice->purchasedProducts as $purchased_product)
                         <div class="item-card flex flex-row justify-between items-center">
                             <div class="flex flex-row items-center gap-x-3">
                                 <img src="{{Storage::url($purchased_product->product->photo)}}" alt ="" class="w-[50px] h-[50px]">
@@ -137,7 +137,7 @@
 
                 @role('owner')
                 @if (!$invoice->is_paid)
-                <form action="{{route('order.update', $invoice)}}" method="post">
+                <form action="{{route('order.update', $invoice->id)}}" method="post">
                     @csrf
                     @method('PUT')
                     <button class="font-bold  py-3 px-5 rounded-full text-white bg-indigo-700">

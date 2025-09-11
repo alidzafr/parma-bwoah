@@ -49,7 +49,7 @@
                     @endif
 
                     <div class="flex flex-row items-center gap-x-2">
-                        <a href="{{route('order.show', $invoice)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
+                        <a href="{{route('order.show', $invoice->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
                     </div>
                 </div>
                 <hr class="my-3">

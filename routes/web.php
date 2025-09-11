@@ -3,9 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductTransactionController;
 use App\Http\Controllers\ProfileController;
-use App\Models\ProductTransaction;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

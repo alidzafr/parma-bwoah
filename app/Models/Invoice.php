@@ -18,7 +18,7 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function purchasedProduct()
+    public function purchasedProducts()
     {
         return $this->hasMany(PurchasedProduct::class);
     }

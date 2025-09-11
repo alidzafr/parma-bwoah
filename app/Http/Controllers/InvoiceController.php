@@ -42,8 +42,10 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show($id)
     {
+        $invoice = Invoice::findorFail($id);
+        // dd($invoice);
         return view('admin/transaction/detail', ['invoice' => $invoice]);
     }
 
@@ -58,8 +60,9 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update($id)
     {
+        $invoice = Invoice::findorFail($id);
         $invoice->update([
             'is_paid' => true
         ]);
