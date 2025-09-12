@@ -22,7 +22,7 @@
 						{{ Auth::user()->name }}
 					</p>
 					<p class="text-sm">
-						{{ Auth::user()->getRoleNames() }}
+						{{ Auth::user()->getRoleNames()->first() }}
 					</p>
 				</div>
 			</div>
