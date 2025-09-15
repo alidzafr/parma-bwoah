@@ -99,6 +99,16 @@ class CartController extends Controller
     {
         $cart = Cart::findorFail($id);
 
-        dd($cart);
+        try {
+            $cart->delete();
+            return redirect()->route('cart.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }
