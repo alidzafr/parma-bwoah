@@ -20,16 +20,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    // Route::resource('cart', CartController::class)->middleware('role:buyer');
-    Route::post('/cart/{id}', [FrontController::class, 'store'])->middleware(['auth', 'verified'])->name('cart.store');
-
-    Route::resource('order', InvoiceController::class)->middleware('role:owner|buyer');
-
+    
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('product', ProductController::class)->middleware('role:owner');
         Route::resource('category', CategoryController::class)->middleware('role:owner');
     });
+    
+    // Route::resource('cart', CartController::class)->middleware('role:buyer');
+    Route::get('/cart', [CartController::class, 'index'])->middleware(['auth', 'verified'])->name('cart.index');
+    Route::post('/cart/{id}', [CartController::class, 'store'])->middleware(['auth', 'verified'])->name('cart.store');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->middleware(['auth', 'verified'])->name('cart.destroy');
+
+    Route::resource('order', InvoiceController::class)->middleware('role:owner|buyer');
 });
 
 require __DIR__ . '/auth.php';

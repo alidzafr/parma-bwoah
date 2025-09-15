@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
@@ -21,9 +20,5 @@ class FrontController extends Controller
 
     public function detail(Product $product) {
         return view('front.detail', ['product' => $product]);
-    }
-
-    public function store($id) {
-        dd($id);
     }
 }

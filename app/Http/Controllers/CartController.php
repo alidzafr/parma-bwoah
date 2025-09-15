@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class CartController extends Controller
 {
@@ -13,7 +17,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $myCart = $user->cart()->with('product')->get();
+        
+        return view('front.cart', ['myCart' => $myCart]);
     }
 
     /**
@@ -27,9 +35,37 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    public function store($productid)
     {
-        //
+        $user = Auth::user();
+
+        $existingCartItem = Cart::where('user_id', $user)->where('product_id', $productid)->first();
+
+        if ($existingCartItem) {
+            return redirect()->route('cart.index');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $cart = Cart::updateOrCreate([
+                'user_id' => $user->id,
+                'product_id' => $productid
+            ]);
+
+            $cart->save();
+            DB::commit();
+
+            return redirect()->route('cart.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            $error = ValidationException::withMessages([
+                'system_error' => ['System error!' . $e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 
     /**
@@ -59,8 +95,10 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        $cart = Cart::findorFail($id);
+
+        dd($cart);
     }
 }
