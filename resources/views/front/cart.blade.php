@@ -39,13 +39,18 @@
                 alt="">
             <div class="flex flex-wrap items-center justify-between w-full gap-1">
                 <div class="flex flex-col gap-1">
-                <h3 class="text-base font-semibold whitespace-nowrap w-[150px] truncate">
-                    {{$cart->product->name}}
-                </h3>
-                <p class="text-sm text-grey product-price" data-price="{{$cart->product->price}}">
-                    {{$cart->product->price}}
-                </p>
+                    <h3 class="text-base font-semibold whitespace-nowrap w-[150px] truncate">
+                        {{$cart->product->name}}
+                    </h3>
+                    <p class="text-sm text-grey product-price" data-price="{{$cart->product->price}}">
+                        {{$cart->product->price}}
+                    </p>
                 </div>
+                {{-- Item Quantity --}}
+                {{-- <div class="size-[30px]">
+                    <h3>Qty</h3>
+                    <input type="number" class="qty" value="1" min="1">
+                </div> --}}
                 <form action="{{route('cart.destroy', $cart->id)}}" method="post">
                     @csrf
                     @method('DELETE')
@@ -227,8 +232,8 @@
         <p class="text-sm text-grey mb-0.5">
             Grand Total
         </p>
-        <p class="text-lg min-[350px]:text-2xl font-bold text-white">
-            Rp 3.290.000
+        <p class="text-lg min-[350px]:text-2xl font-bold text-white" id="checkout-grand-total-price">
+
         </p>
         </div>
         <button type="button" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap" onclick="window.location.href='/public/pages/success-checkout.html'">
@@ -242,6 +247,7 @@
     <script src="{{asset('scripts/global.js')}}"></script>
 
     <script>
+
         function calculatePrice()
         {
             let subTotal = 0;
@@ -251,18 +257,38 @@
                 subTotal += parseFloat(item.getAttribute('data-price'))
             });
             
+            document.getElementById('checkout-delivery-fee').textContent = 'Rp '+deliveryFee.toLocaleString('id',
+                {minimumFractionDigits: 2, maximumFractionDigits: 2}
+            );
+
             document.getElementById('checkout-sub-total').textContent = 'Rp '+subTotal.toLocaleString('id',
                 {minimumFractionDigits: 2, maximumFractionDigits: 2}
             );
             
-            document.getElementById('checkout-delivery-fee').textContent = 'Rp '+deliveryFee.toLocaleString('id',
+            const tax = 11 * subTotal / 100;
+            document.getElementById('checkout-ppn').textContent = 'Rp '+tax.toLocaleString('id',
                 {minimumFractionDigits: 2, maximumFractionDigits: 2}
+            );
+            
+            const Insurance = 23 * subTotal / 100;
+            document.getElementById('checkout-insurance').textContent = 'Rp '+Insurance.toLocaleString('id',
+                {minimumFractionDigits: 2, maximumFractionDigits: 2}
+            );
+            
+            const grandTotalPrice = subTotal + tax + Insurance + deliveryFee;
+            document.getElementById('checkout-grand-total').textContent = 'Rp '+grandTotalPrice.toLocaleString('id',
+                {minimumFractionDigits: 2, maximumFractionDigits: 2}
+            );
+            
+            document.getElementById('checkout-grand-total-price').textContent = 'Rp '+grandTotalPrice.toLocaleString('id',
+                {minimumFractionDigits: 0, maximumFractionDigits: 2}
             );
         }
 
-        document.addEventListener('DOMContentLoader', function(){
+        document.addEventListener('DOMContentLoaded', function(){
             calculatePrice();
         })
+
     </script>
 </body>
 
