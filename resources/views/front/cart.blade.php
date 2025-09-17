@@ -171,76 +171,76 @@
 
     <!-- Delivery to -->
     <section class="wrapper flex flex-col gap-2.5 pb-40">
-    <div class="flex items-center justify-between">
-        <p class="text-base font-bold">
-        Delivery to
-        </p>
-        <button type="button" class="p-2 bg-white rounded-full" data-expand="deliveryForm">
-        <img src="{{asset('assets/svgs/ic-chevron.svg')}}')}}" class="transition-all duration-300 -rotate-180 size-5" alt="">
-        </button>
-    </div>
-    <form action="" method="" class="p-6 bg-white rounded-3xl" id="deliveryForm">
-        <div class="flex flex-col gap-5">
-        <!-- Address -->
-        <div class="flex flex-col gap-2.5">
-            <label for="address" class="text-base font-semibold">Address</label>
-            <input style="background-image: url('{{asset('assets/svgs/ic-location.svg')}}')" type="text" name="address" id="address__"
-            class="form-input" value="Tedjamudita 3">
+        <div class="flex items-center justify-between">
+            <p class="text-base font-bold">
+            Delivery to
+            </p>
+            <button type="button" class="p-2 bg-white rounded-full" data-expand="deliveryForm">
+            <img src="{{asset('assets/svgs/ic-chevron.svg')}}')}}" class="transition-all duration-300 -rotate-180 size-5" alt="">
+            </button>
         </div>
-        <!-- City -->
-        <div class="flex flex-col gap-2.5">
-            <label for="city" class="text-base font-semibold">City</label>
-            <input style="background-image: url('{{asset('assets/svgs/ic-map.svg')}}')" type="text" name="city" id="city__" class="form-input"
-            value="Bolavia">
-        </div>
-        <!-- Post Code -->
-        <div class="flex flex-col gap-2.5">
-            <label for="postcode" class="text-base font-semibold">Post Code</label>
-            <input style="background-image: url('{{asset('assets/svgs/ic-house.svg')}}')" type="number" name="postcode" id="postcode__"
-            class="form-input" value="22081882">
-        </div>
-        <!-- Phone Number -->
-        <div class="flex flex-col gap-2.5">
-            <label for="phonenumber" class="text-base font-semibold">Phone Number</label>
-            <input style="background-image: url('{{asset('assets/svgs/ic-phone.svg')}}')" type="number" name="phonenumber" id="phonenumber__"
-            class="form-input" value="602192301923">
-        </div>
-        <!-- Add. Notes -->
-        <div class="flex flex-col gap-2.5">
-            <label for="notes" class="text-base font-semibold">Add. Notes</label>
-            <span class="relative">
-            <img src="{{asset('assets/svgs/ic-edit.svg')}}" class="absolute size-5 top-4 left-4" alt="">
-            <textarea name="notes" id="notes__"
-                class="form-input !rounded-2xl w-full min-h-[150px]">nearby with local shops that close with the big river next to aftermarket place.</textarea>
-            </span>
-        </div>
-        <!-- Proof of Payment -->
-        <div class="flex flex-col gap-2.5">
-            <label for="proof_of_payment" class="text-base font-semibold">Proof of Payment</label>
-            <input style="background-image: url('{{asset('assets/svgs/ic-folder-add.svg')}}')" type="file" name="proof_of_payment" id="proof_of_payment__"
-            class="form-input">
-        </div>
-        </div>
+        <form action="" method="" class="p-6 bg-white rounded-3xl" id="deliveryForm">
+            <div class="flex flex-col gap-5">
+            <!-- Address -->
+            <div class="flex flex-col gap-2.5">
+                <label for="address" class="text-base font-semibold">Address</label>
+                <input style="background-image: url('{{asset('assets/svgs/ic-location.svg')}}')" type="text" name="address" id="address__"
+                class="form-input" value="Tedjamudita 3">
+            </div>
+            <!-- City -->
+            <div class="flex flex-col gap-2.5">
+                <label for="city" class="text-base font-semibold">City</label>
+                <input style="background-image: url('{{asset('assets/svgs/ic-map.svg')}}')" type="text" name="city" id="city__" class="form-input"
+                value="Bolavia">
+            </div>
+            <!-- Post Code -->
+            <div class="flex flex-col gap-2.5">
+                <label for="postcode" class="text-base font-semibold">Post Code</label>
+                <input style="background-image: url('{{asset('assets/svgs/ic-house.svg')}}')" type="number" name="postcode" id="postcode__"
+                class="form-input" value="22081882">
+            </div>
+            <!-- Phone Number -->
+            <div class="flex flex-col gap-2.5">
+                <label for="phonenumber" class="text-base font-semibold">Phone Number</label>
+                <input style="background-image: url('{{asset('assets/svgs/ic-phone.svg')}}')" type="number" name="phonenumber" id="phonenumber__"
+                class="form-input" value="602192301923">
+            </div>
+            <!-- Add. Notes -->
+            <div class="flex flex-col gap-2.5">
+                <label for="notes" class="text-base font-semibold">Add. Notes</label>
+                <span class="relative">
+                <img src="{{asset('assets/svgs/ic-edit.svg')}}" class="absolute size-5 top-4 left-4" alt="">
+                <textarea name="notes" id="notes__"
+                    class="form-input !rounded-2xl w-full min-h-[150px]">nearby with local shops that close with the big river next to aftermarket place.</textarea>
+                </span>
+            </div>
+            <!-- Proof of Payment -->
+            <div class="flex flex-col gap-2.5">
+                <label for="proof_of_payment" class="text-base font-semibold">Proof of Payment</label>
+                <input style="background-image: url('{{asset('assets/svgs/ic-folder-add.svg')}}')" type="file" name="proof_of_payment" id="proof_of_payment__"
+                class="form-input">
+            </div>
+            </div>
+            </div>
+        </section>
+        
+        <!-- Floating grand total -->
+        <div class="fixed z-50 bottom-[30px] bg-black rounded-3xl p-5 left-1/2 -translate-x-1/2 w-[calc(100dvw-32px)] max-w-[425px]">
+            <section class="flex items-center justify-between gap-5">
+                <div>
+                    <p class="text-sm text-grey mb-0.5">
+                        Grand Total
+                    </p>
+                    <p class="text-lg min-[350px]:text-2xl font-bold text-white" id="checkout-grand-total-price">
+
+                    </p>
+                </div>
+                <button type="button" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap" onclick="window.location.href='/public/pages/success-checkout.html'">
+                    Confirm
+                </button>
+            </section>
         </div>
     </form>
-    </section>
-
-    <!-- Floating grand total -->
-    <div class="fixed z-50 bottom-[30px] bg-black rounded-3xl p-5 left-1/2 -translate-x-1/2 w-[calc(100dvw-32px)] max-w-[425px]">
-    <section class="flex items-center justify-between gap-5">
-        <div>
-        <p class="text-sm text-grey mb-0.5">
-            Grand Total
-        </p>
-        <p class="text-lg min-[350px]:text-2xl font-bold text-white" id="checkout-grand-total-price">
-
-        </p>
-        </div>
-        <button type="button" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap" onclick="window.location.href='/public/pages/success-checkout.html'">
-        Confirm
-        </button>
-    </section>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
