@@ -8,7 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [FrontController::class, 'index'])->middleware(['auth', 'verified'])->name('front.index');
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 Route::get('/detail/{product:slug}', [FrontController::class, 'detail'])->name('front.product.detail');
 
@@ -20,12 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('product', ProductController::class)->middleware('role:owner');
         Route::resource('category', CategoryController::class)->middleware('role:owner');
     });
-    
+
     // Route::resource('cart', CartController::class)->middleware('role:buyer');
     Route::get('/cart', [CartController::class, 'index'])->middleware(['auth', 'verified'])->name('cart.index');
     Route::post('/cart/{id}', [CartController::class, 'store'])->middleware(['auth', 'verified'])->name('cart.store');

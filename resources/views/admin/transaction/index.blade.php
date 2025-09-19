@@ -15,16 +15,18 @@
                 {{-- Row Content --}}
                 @forelse ($invoices as $invoice)
                 <div class="item-card flex flex-row justify-between items-center">
-                    <div>
-                        <p class="text-base text-slate-500">
-                            Total Transaksi
-                        </p>
-                        <h3 class="text-xl font-bold text-indigo-950">
-                            {{$invoice->total_amount}}
-                        </h3>
-                    </div>
+                    <a href="{{route('order.show', $invoice->id)}}">
+                        <div>
+                            <p class="text-base text-slate-500">
+                                Total Transaksi
+                            </p>
+                            <h3 class="text-xl font-bold text-indigo-950">
+                                {{$invoice->total_amount}}
+                            </h3>
+                        </div>
+                    </a>
                     
-                    <div>
+                    <div class="hidden md:flex flex-col">
                         <p class="text-base text-slate-500">
                             Date
                         </p>
@@ -48,7 +50,7 @@
                     </span>
                     @endif
 
-                    <div class="flex flex-row items-center gap-x-2">
+                    <div class="hidden md:flex flex-row items-center gap-x-2">
                         <a href="{{route('order.show', $invoice->id)}}" class="py-3 px-5 rounded-full text-white bg-indigo-700">View Details</a>
                     </div>
                 </div>

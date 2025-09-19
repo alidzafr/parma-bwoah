@@ -12,6 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('front.index')" :active="request()->routeIs('front.index')">
+                        {{ __('Store') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -31,7 +37,7 @@
                 @endrole
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('order.index')" :active="request()->routeIs('product_tranasction.index')">
+                    <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
                         {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Transaction') }}
                     </x-nav-link>
                 </div>
@@ -86,8 +92,16 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('front.index')" :active="request()->routeIs('front.index')">
+                {{ __('Store') }}
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('order.index')" :active="request()->routeIs('order.index')">
+                {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Transaction') }}
             </x-responsive-nav-link>
         </div>
 

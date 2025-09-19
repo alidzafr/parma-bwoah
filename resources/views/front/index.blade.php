@@ -19,10 +19,15 @@
 				</div>
 				<div class="">
 					<p class="text-base font-semibold capitalize text-primary">
-						{{ Auth::user()->name }}
+					@auth
+							{{ Auth::user()->name }}
 					</p>
 					<p class="text-sm">
-						{{ Auth::user()->getRoleNames()->first() }}
+							{{ Auth::user()->getRoleNames()->first() }}
+					@endauth
+					@guest
+						Guest
+					@endguest
 					</p>
 				</div>
 			</div>
@@ -59,14 +64,14 @@
 						Stores
 					</p>
 				</a>
-				<a href="#" class="flex flex-col items-center justify-center gap-1 px-1 group">
+				<a href="{{route('cart.index')}}" class="flex flex-col items-center justify-center gap-1 px-1 group">
 					<img src="{{asset('assets/svgs/ic-note.svg')}}" class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
 					<p
 						class="border-b-4 border-transparent group-[.is-active]:border-primary pb-3 text-xs text-center font-semibold text-grey group-[.is-active]:text-primary">
 						Orders
 					</p>
 				</a>
-				<a href="#" class="flex flex-col items-center justify-center gap-1 px-1 group">
+				<a href="{{route('dashboard')}}" class="flex flex-col items-center justify-center gap-1 px-1 group">
 					<img src="{{asset('assets/svgs/ic-profile.svg')}}" class="filter-to-grey group-[.is-active]:filter-to-primary"
 						alt="">
 					<p
