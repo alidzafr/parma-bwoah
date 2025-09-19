@@ -179,7 +179,7 @@
             <img src="{{asset('assets/svgs/ic-chevron.svg')}}')}}" class="transition-all duration-300 -rotate-180 size-5" alt="">
             </button>
         </div>
-        <form method="POST" action="{{ route('order.store') }}" class="p-6 bg-white rounded-3xl" id="deliveryForm">
+        <form method="POST" action="{{ route('order.store') }}" class="p-6 bg-white rounded-3xl" id="deliveryForm" enctype="multipart/form-data">
             @csrf
             @if ($errors->any()) <div class="alert alert-danger"> <ul> @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul> </div> @endif
             <div class="flex flex-col gap-5">

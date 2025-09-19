@@ -56,9 +56,9 @@ class InvoiceController extends Controller
 
         try {
             $subTotalCents = 0;
-            $deliveryFeeCents = 0;
+            $deliveryFeeCents = 10000 * 100;
 
-            $cartItems = $user->cart;
+            $cartItems = $user->carts;
 
             foreach ($cartItems as $item) {
                 $subTotalCents += $item->product->price * 100;
@@ -85,18 +85,18 @@ class InvoiceController extends Controller
 
             //Save PurchasedProduct 
             foreach ($cartItems as $item) {
-                PurchasedProduct::create([[
-                    'invoice_id' => $newTransaction->id,
-                    'product_id' => $item->product_id,
-                    'price' => $item->product->price
-                ]]);
+                $newTransaction->purchasedProducts()->create([
+                    'product_id' => $item->product['id'],
+                    'price' => $item->product['price'],
+                    'quantity' => 1
+                ]);
 
                 // Hapus dari keranjang
                 $item->delete();
             }
             DB::commit();
 
-            return redirect()->route('admin.transaction.index');
+            return redirect()->route('order.index');
         } catch (\Exception $e) {
             DB::rollBack();
 
