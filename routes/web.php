@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 Route::get('/detail/{product:slug}', [FrontController::class, 'detail'])->name('front.product.detail');
+Route::get('/category/{category:slug}', [FrontController::class, 'findCategory'])->name('front.category');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
