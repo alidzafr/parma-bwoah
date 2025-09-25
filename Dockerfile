@@ -21,6 +21,9 @@ RUN composer install
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
+# Link Image dir into storage
+RUN php artisan storage:link || true
+
 # Expose port
 EXPOSE 9000
 
