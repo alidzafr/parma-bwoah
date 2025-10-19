@@ -8,6 +8,24 @@ services:
     restart: unless-stopped
     volumes:
       - .:/var/www
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    container_name: "laravel-mysql"
+    image: mysql:8.0.43-debian
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=parma
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - "3306:3306"
     networks:
       - laravel
 
@@ -38,3 +56,6 @@ services:
 
 networks:
   laravel:
+
+volumes:
+  db:
